@@ -1,0 +1,89 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+        <mat-card class="card">
+            <form class="form" #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+                <mat-card-title>
+                    Product
+                </mat-card-title>
+                <input 
+                    type="hidden" 
+                    name="id" 
+                    #id="ngModel" 
+                    [(ngModel)]="productService.productSelected._id"
+                >
+                <input 
+                    type="hidden"
+                    name="index"
+                    #index="ngModel"
+                    [(ngModel)]="productService.productSelected._id ? productService.productSelected.index : productService.lengthProducts"
+                >
+                <mat-form-field class="group">
+                    <mat-label>
+                        Title
+                    </mat-label>
+                    <input 
+                        type="text" 
+                        matInput
+                        name="title"
+                        #title="ngModel"
+                        [(ngModel)]="productService.productSelected.title"
+                    >
+                </mat-form-field>
+                <mat-form-field class="group">
+                    <mat-label>
+                        Description
+                    </mat-label>
+                    <textarea 
+                        matInput
+                        name="description"
+                        #description="ngModel"
+                        [(ngModel)]="productService.productSelected.description"
+                    ></textarea>
+                </mat-form-field>
+                <button mat-raised-button color="primary" class="btn_add">
+                   Save
+                </button>
+            </form>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile class="grid">
+        <table mat-table class="mat-elevation-z8" [dataSource]="productService.products">
+            <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef>Index</th>
+                <td mat-cell class="cell" *matCellDef="let product">{{product.index}}</td>
+            </ng-container>
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>Title</th>
+                <td mat-cell class="cell" *matCellDef="let product">{{product.title}}</td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef>Description</th>
+                <td mat-cell class="cell" *matCellDef="let product">{{product.description}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell class="cell" *matCellDef="let product">
+                    <button 
+                        mat-fab 
+                        color="primary" 
+                        class="btn"
+                        (click)="deleteProduct(product._id)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button 
+                        mat-fab 
+                        color="accent" 
+                        class="btn"
+                        (click)="putProduct(product)"
+                    >
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-grid-tile>
+</mat-grid-list>

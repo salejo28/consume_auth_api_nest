@@ -1,0 +1,43 @@
+<div class="content-form">
+    <mat-card>
+        <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+            <mat-card-title>
+                Login
+            </mat-card-title>
+            <mat-form-field class="group">
+                <mat-label>Username</mat-label>
+                <input 
+                    type="text" 
+                    name="username"
+                    matInput
+                    formControlName="username"
+                    required
+                    autofocus
+                >
+                <mat-error 
+                    *ngIf="f.username.errors && f.username.errors.required"
+                >
+                    Username is required!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="group">
+                <mat-label>Password</mat-label>
+                <input 
+                    type="password" 
+                    matInput
+                    name="password"
+                    formControlName="password"
+                    required
+                >
+                <mat-error 
+                    *ngIf="f.password.errors && f.password.errors.required"
+                >
+                    Password is required!
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="btn_send">
+                Login
+            </button>
+        </form>
+    </mat-card>
+</div>

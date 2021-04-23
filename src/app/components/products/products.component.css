@@ -1,0 +1,24 @@
+.form {
+    width: 400px;    
+    padding: 5px;
+}
+
+.group {
+    width: 100%;
+}
+
+.btn_add {
+    float: right;
+}
+
+table {
+    width: 85%;
+}
+
+.cell {
+    padding: 0 5px;
+}
+
+.btn {
+    margin: 3px 5px;
+}
